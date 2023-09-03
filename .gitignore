@@ -128,3 +128,6 @@ dist
 
 # System Files
 .DS_Store
+
+# Build Files
+mysql/

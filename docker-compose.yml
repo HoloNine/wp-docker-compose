@@ -4,7 +4,16 @@ services:
     image: wordpress:latest
     container_name: wordpress
     volumes:
-    - ./wordpress:/var/www/html
+      # This only mounts the current working dir to the WP plugin dir.
+      # This means that all other WP files are copied everytime after docker-compose down.
+      - ./theme_name:/var/www/html/wp-content/themes/theme-name/
+      - ./plugin_name:/var/www/html/wp-content/plugins/plugin-name/
+      # Remove dev dirs from the theme.
+      - ./theme_name/src:/var/www/html/wp-content/themes/theme-name/src/
+      - ./theme_name/node_modules:/var/www/html/wp-content/themes/theme-name/node_modules/
+      # Remove dev dirs from the plugin.
+      - ./plugin_name/src:/var/www/html/wp-content/plugins/plugin-name/src/
+      - ./plugin_name/node_modules:/var/www/html/wp-content/plugins/plugin-name/node_modules/
     environment:
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_USER: user
@@ -32,4 +41,3 @@ services:
 
 volumes:
   mysql:
-  wordpress:
