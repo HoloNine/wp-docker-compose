@@ -9,8 +9,9 @@ up:
 down:
 	docker compose down -v
 
-.PHONY: perms
-perms:
+.PHONY: fix
+fix:
 	sudo chcon -Rt svirt_sandbox_file_t ./public
 	sudo chown -R $$USER:$$USER ./public
-	chmod -R u+rw ./public
+	sudo chmod -R 755 ./public
+	sudo find ./public -type f -exec chmod 644 {} \;
