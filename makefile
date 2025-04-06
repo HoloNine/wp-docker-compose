@@ -3,11 +3,11 @@
 # Default target
 .PHONY: up
 up:
-	docker compose up -d
+	podman compose up -d
 
 .PHONY: down
 down:
-	docker compose down -v
+	podman compose down -v
 
 .PHONY: fix
 fix:
